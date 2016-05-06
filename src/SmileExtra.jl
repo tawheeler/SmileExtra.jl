@@ -43,6 +43,7 @@ function adjacency_matrix_to_net(adj::BitMatrix, dset::Dataset)
 end
 
 include("statistics.jl")
+include("laplace_smoothing.jl")
 
 
 end # end module
