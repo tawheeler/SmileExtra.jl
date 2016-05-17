@@ -99,7 +99,7 @@ end
 function statistics(net::Network, bincounts::AbstractVector{Int}, discrete_data::AbstractMatrix{Int})
 
     n = length(bincounts)
-	parentList = [int(collect(get_parents(net, i-1)+1)) for i in 1:n]
+	parentList = [convert(Vector{Int}, collect(get_parents(net, i-1)+1)) for i in 1:n]
 	statistics(parentList, bincounts, discrete_data)
 end
 function statistics(adj::BitMatrix, bincounts::AbstractVector{Int}, discrete_data::AbstractMatrix{Int})

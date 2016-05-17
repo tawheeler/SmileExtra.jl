@@ -9,7 +9,9 @@ function create_new_net_with_prior_counts(net::Network, r::AbstractVector{Int}, 
     net2 = Network()
 
     for i = 1 : nvars
-        nodeid = add_node(net2, DSL_CPT, get_name(get_node(net, i-1)))
+        node = get_node(net, i-1)
+        name = get_name(node)
+        nodeid = add_node(net2, DSL_CPT, name)
         set_number_of_outcomes(definition(get_node(net2, nodeid)), r[i])
         @assert(nodeid == i - 1)
     end
@@ -78,18 +80,18 @@ function create_new_net_with_prior_counts(net::Network, r::AbstractVector{Int}, 
     nvars = length(r)
     net2 = Network()
 
-    for i = 1 : nvars
+    for i in 1 : nvars
         nodeid = add_node(net2, DSL_CPT, get_name(get_node(net, i-1)))
         set_number_of_outcomes(definition(get_node(net2, nodeid)), r[i])
         @assert(nodeid == i - 1)
     end
-    for i = 1 : nvars
+    for i in 1 : nvars
         nodeid = i - 1
         for p_id in get_parents(net, nodeid)
             add_arc(net2, p_id, nodeid)
         end
     end
-    for i = 1 : nvars
+    for i in 1 : nvars
 
         nodeid = i - 1
 
